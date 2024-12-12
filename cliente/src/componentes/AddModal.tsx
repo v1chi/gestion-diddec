@@ -30,7 +30,6 @@ export default function AddModal({ isOpen, onClose, type, onSave }: AddModalProp
   const [competencias, setCompetencias] = useState<Competencia[]>([]);
   const [selectedCompetencias, setSelectedCompetencias] = useState<number[]>([]); // Competencias seleccionadas
   const [showCompetencias, setShowCompetencias] = useState(false);
-
   useEffect(() => {
     if (type === 'competencia') {
       setFormData({ 
@@ -75,7 +74,7 @@ export default function AddModal({ isOpen, onClose, type, onSave }: AddModalProp
 
   const fetchCompetencias = async () => {
     try {
-      const response = await axios.get<Competencia[]>('http://localhost:3001/competencias');
+      const response = await axios.get<Competencia[]>(`${process.env.NEXT_PUBLIC_API_BASE_URL}/competencias`);
       setCompetencias(response.data);
     } catch (error) {
       console.error('Error al cargar competencias:', error);
@@ -123,15 +122,17 @@ export default function AddModal({ isOpen, onClose, type, onSave }: AddModalProp
   }
 
   const handleSubmit = (e: React.FormEvent) => {
+    
+    console.log(`data usuario enviar ${process.env.NEXT_PUBLIC_API_BASE_URL}`)
     e.preventDefault();
     if (type === 'competencia') {
-      addData('http://localhost:3001/competencias', formData);
+      addData(`${process.env.NEXT_PUBLIC_API_BASE_URL}/competencias`, formData);
     } else if (type === 'estudiante') {
-      addData('http://localhost:3001/estudiantes', formData);
+      addData(`${process.env.NEXT_PUBLIC_API_BASE_URL}/estudiantes`, formData);
     } else if (type === 'usuario') {
-      addData('http://localhost:3001/usuarios', formData);
+      addData(`${process.env.NEXT_PUBLIC_API_BASE_URL}/usuarios`, formData);
     } else if (type === 'formacion') {
-      addData('http://localhost:3001/formaciones', formData);
+      addData(`${process.env.NEXT_PUBLIC_API_BASE_URL}/formaciones`, formData);
       const formacionData = {
         ...formData,
         competencias: selectedCompetencias // Incluir competencias seleccionadas

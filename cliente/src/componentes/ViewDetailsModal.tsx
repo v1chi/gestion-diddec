@@ -5,7 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog.tsx"
-
+import { Button } from './ui/button.tsx';
+import { Table, TableBody, TableRow, TableHeader, TableHead, TableFooter, TableCaption, TableCell } from './ui/table.js';
 
 interface ViewDetailsModalProps {
   isOpen: boolean;
@@ -82,13 +83,18 @@ export default function ViewDetailsModal({ isOpen, onClose, data, type }: ViewDe
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog 
+      open={isOpen} 
+      onOpenChange={onClose}
+      aria-labelledby="dialog-title"
+      aria-describedby="dialog-description"
+      >
       <DialogContent className="sm:max-w-[800px]">
         <DialogHeader>
           <DialogTitle>
             Detalles de {type.charAt(0).toUpperCase() + type.slice(1)}
           </DialogTitle>
-        </DialogHeader>
+        </DialogHeader> 
         <div className="mt-4">
           {renderDetails()}
         </div>

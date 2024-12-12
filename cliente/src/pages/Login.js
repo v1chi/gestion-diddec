@@ -13,7 +13,7 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/usuarios/login', { 
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/usuarios/login`, { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json', 
         }, 

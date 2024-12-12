@@ -83,7 +83,7 @@ export default function EditDetailsModal({ isOpen, onClose, data, type, onSave }
         throw new Error("Tipo de recurso no reconocido");
       }
   
-      const url = `http://localhost:3001/${endpoint}/${formData.id}`;
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${endpoint}/${formData.id}`;
       console.log("URL utilizada:", url);
       console.log("Datos actualizados enviados:", updatedData);
   
